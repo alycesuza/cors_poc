@@ -40,7 +40,7 @@
     <script>
         function validateCORS() {
             var xhr = new XMLHttpRequest();
-            xhr.open('GET', 'http://vulnerable.com/sensitive-data', true);
+            xhr.open('GET', 'https://alycesuza.github.io/cors_poc/data.json', true);
             xhr.withCredentials = true;
             xhr.onreadystatechange = function() {
                 if (xhr.readyState == 4) {
@@ -63,6 +63,7 @@
                 statusDiv.innerHTML = 'Status: Erro na solicitação.';
                 statusDiv.style.borderColor = 'red';
                 statusDiv.style.backgroundColor = '#ffe0e0';
+                console.error('Erro na solicitação:', xhr);
             };
             xhr.send();
         }

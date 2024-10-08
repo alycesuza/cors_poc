@@ -45,20 +45,27 @@
             xhr.onreadystatechange = function() {
                 if (xhr.readyState == 4) {
                     var statusDiv = document.getElementById('status');
+                    console.log('XHR Status:', xhr.status);
+                    console.log('XHR Response:', xhr.responseText);
                     if (xhr.status == 200) {
                         statusDiv.innerHTML = 'Status: Sucesso! Dados recebidos: ' + xhr.responseText;
                         statusDiv.style.borderColor = 'green';
                         statusDiv.style.backgroundColor = '#e0ffe0';
                     } else {
-                        statusDiv.innerHTML = 'Status: Falha ao obter dados.';
+                        statusDiv.innerHTML = 'Status: Falha ao obter dados. Código de status: ' + xhr.status;
                         statusDiv.style.borderColor = 'red';
                         statusDiv.style.backgroundColor = '#ffe0e0';
                     }
                 }
+            };
+            xhr.onerror = function() {
+                var statusDiv = document.getElementById('status');
+                statusDiv.innerHTML = 'Status: Erro na solicitação.';
+                statusDiv.style.borderColor = 'red';
+                statusDiv.style.backgroundColor = '#ffe0e0';
             };
             xhr.send();
         }
     </script>
 </body>
 </html>
-

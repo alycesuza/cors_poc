@@ -82,6 +82,7 @@
                 if (xhr.readyState == 4) {
                     var statusDiv = document.getElementById('status');
                     console.log('Clear Data XHR Status:', xhr.status);
+                    console.log('Clear Data XHR Response:', xhr.responseText);
                     if (xhr.status == 200) {
                         statusDiv.innerHTML = 'Status: Dados apagados com sucesso!';
                         statusDiv.style.borderColor = 'blue';
@@ -105,3 +106,4 @@
     </script>
 </body>
 </html>
+

